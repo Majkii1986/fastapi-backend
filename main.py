@@ -4,4 +4,5 @@ app = FastAPI()
 
 @app.get("/")
 def root():
-    return {"message": "Ahoj, bežím na Render.com!"}
+    return {"message": "Ahoj, frčím na Render.com!"}
+
