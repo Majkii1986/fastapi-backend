@@ -7,8 +7,8 @@ from django.contrib.auth.models import User
 from rest_framework_simplejwt.tokens import RefreshToken
 
 class TaskViewSet(viewsets.ModelViewSet):
-    serializer_class = TaskSerializer
-    permission_classes = [permissions.IsAuthenticated]
+    queryset = Task.objects.all()  # 👈 toto je dôležité, inak spadne na basename error
+    serializer_class = TaskSerializer    
 
     def get_queryset(self):
         return Task.objects.filter(owner=self.request.user)
@@ -28,4 +28,5 @@ def register(request):
             'refresh': str(refresh),
             'access': str(refresh.access_token)
         })
+
     return Response(serializer.errors, status=400)
